@@ -49,10 +49,10 @@ export default function Header() {
         <NavbarLink as={Link} to="/" active={path==="/"}>
           Home
         </NavbarLink>
-        <NavbarLink as={Link} to="/About" active={path==="/about"}>
+        <NavbarLink as={Link} to="/About" active={path==="/About"}>
           About
         </NavbarLink>
-        <NavbarLink as={Link} to="/Projects" active={path==="/projects"}>
+        <NavbarLink as={Link} to="/Projects" active={path==="/Projects"}>
           Projects
         </NavbarLink>
       </NavbarCollapse>
