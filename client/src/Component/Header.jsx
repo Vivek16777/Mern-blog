@@ -18,8 +18,8 @@ export default function Header() {
   return (
     <Navbar className="border-b-2" fluid rounded>
       <NavbarBrand as={Link} to="/">
-        <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">Vivek's</span>
-        <span className="ml-2 text-sm sm:text-xl font-semibold dark:text-white">Blog</span>
+        <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">Note's</span>
+        <span className="ml-2 text-sm sm:text-xl font-semibold dark:text-white">Circle</span>
       </NavbarBrand>
       <form className="hidden lg:inline">
         <TextInput
