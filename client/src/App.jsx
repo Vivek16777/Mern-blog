@@ -12,7 +12,7 @@ import Footer from './Component/Footercmp.jsx';
 export default function App() {
   return (
     <BrowserRouter>
-    <div className='max-h-screen'>
+    <div className='min-h-screen flex flex-col'>
     <Header/>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -24,8 +24,9 @@ export default function App() {
           <Route path="projects" element={<Projects />} />
         </Route>
       </Routes>
-    </div>
+    
       <Footer/>
+      </div>
     </BrowserRouter>
   );
 }
