@@ -1,4 +1,4 @@
-import {Link ,Navigate,useNavigate} from 'react-router-dom';
+import {Link ,useNavigate} from 'react-router-dom';
 import { TextInput,Label,Button} from 'flowbite-react';
 import {useState} from 'react';
 import { Alert } from 'flowbite-react';
@@ -17,6 +17,7 @@ const Signup = () => {
     if(!formData.username || !formData.email || !formData.password){
       return setErrorMessages("Please fill in all fields");
     }
+    
     try{
       setLoading(true);
       setErrorMessages(null);

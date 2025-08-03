@@ -16,7 +16,8 @@ import { FaMoon } from 'react-icons/fa';
 export default function Header() {
   const path=useLocation().pathname;
   return (
-    <Navbar className="border-b-2" fluid rounded>
+    <Navbar className="border-b-2 flex justify-center " fluid rounded>
+      <div className="xl:w-[80vw]  mx-auto flex justify-between items-center gap-6">
       <NavbarBrand as={Link} to="/">
         <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">Note's</span>
         <span className="ml-2 text-sm sm:text-xl font-semibold dark:text-white">Circle</span>
@@ -55,7 +56,9 @@ export default function Header() {
         <NavbarLink as={Link} to="/Projects" active={path==="/Projects"}>
           Projects
         </NavbarLink>
+      
       </NavbarCollapse>
+       </div>
     </Navbar>
   );
 }

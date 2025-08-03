@@ -7,10 +7,12 @@ import Signup from './pages/Signup.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Projects from './pages/Projects.jsx';
 import Header from './Component/Header.jsx';
+import Footer from './Component/Footercmp.jsx';
 
 export default function App() {
   return (
     <BrowserRouter>
+    <div className='max-h-screen'>
     <Header/>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -22,6 +24,8 @@ export default function App() {
           <Route path="projects" element={<Projects />} />
         </Route>
       </Routes>
+    </div>
+      <Footer/>
     </BrowserRouter>
   );
 }
