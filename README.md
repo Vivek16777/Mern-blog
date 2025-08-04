@@ -2,7 +2,6 @@
 
 Note's Circle is a minimal, modern web application built for taking, managing, and sharing notes—whether you're a student, professional, or creative thinker. The platform supports rich text editing, tag-based filtering, and personal note privacy or collaboration features.
 
-![Note's Circle Screenshot](screenshot.png)
 
 ## 🚀 Features
 
