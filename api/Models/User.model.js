@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema(
     profilePicture: {
       type: String,
       default:
-        "https://www.bing.com/images/search?view=detailV2&ccid=vmoycMUO&id=46A5C8C5560773A0FD9F930D58E6E83B4A541BCA&thid=OIP.vmoycMUOmbcs0Vw-1iIdVAHaHa&mediaurl=https%3a%2f%2fcdn.pixabay.com%2fphoto%2f2023%2f02%2f18%2f11%2f00%2ficon-7797704_1280.png&exph=1280&expw=1280&q=default+profilepic+pixabay&simid=608006695580105101&FORM=IRPRST&ck=E42DADCB39E0BCD8D8657D24C2015E0F&selectedIndex=7&itb=0",
+        "https://static.vecteezy.com/system/resources/previews/024/983/914/large_2x/simple-user-default-icon-free-png.png",
     },
   },
   { timestamps: true }
