@@ -3,6 +3,7 @@ import { TextInput,Label,Button} from 'flowbite-react';
 import {useState} from 'react';
 import { Alert } from 'flowbite-react';
 import { Spinner } from 'flowbite-react';
+import Oauth from '../Component/Oauth.jsx';
 
 const Signup = () => {
   const [formData,setFormData]=useState({});
@@ -27,7 +28,14 @@ const Signup = () => {
       });
       const data = await res.json();
       if(data.success === false){
-        return setErrorMessages(data.message);
+         if(data.statusCode === 409){
+          setLoading(false); 
+          return setErrorMessages(data.message); 
+         }
+         else{
+            setLoading(false);
+            return setErrorMessages(data.message);
+         }
       }
       setLoading(false);
       if(res.ok){
@@ -39,7 +47,7 @@ const Signup = () => {
     }
   }
   return (
-    <div className="flex-1 flex justify-center align-middle">
+    <div className="flex-1 flex justify-center align-middle mt-20 mb-20">
       <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5'>
         <div className='flex-1'>
         <Link to='/' className='font-bold dark:text-white text-4xl'>
@@ -76,6 +84,7 @@ const Signup = () => {
               ):'sign-up'
             }
             </Button>
+            <Oauth/>
           </form>
           <div className="flex gap-2 text-sm mt-5">
             <span>Have an account?</span>

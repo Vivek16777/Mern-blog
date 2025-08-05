@@ -8,9 +8,11 @@ import 'flowbite';
 import { PersistGate } from 'redux-persist/integration/react';
 
 createRoot(document.getElementById('root')).render(
-  <PersistGate persistor={persistor}>
-    <Provider store={store}>
-    <App />
+  <StrictMode>
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <App />
+    </PersistGate>
     </Provider>
-  </PersistGate >
+  </StrictMode>
 );

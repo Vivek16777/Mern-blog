@@ -16,11 +16,10 @@ import { FaMoon } from 'react-icons/fa';
 export default function Header() {
   const path=useLocation().pathname;
   return (
-    <Navbar className="border-b-2 flex justify-center " fluid rounded>
-      <div className="xl:w-[80vw]  mx-auto flex justify-between items-center gap-6">
-      <NavbarBrand as={Link} to="/">
+    <Navbar className="border-b-2 justify-center" fluid rounded>
+      <NavbarBrand className="lg:ml-30" as={Link} to="/">
         <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">Note's</span>
-        <span className="ml-2 text-sm sm:text-xl font-semibold dark:text-white">Circle</span>
+        <span className="ml-2 text-xl font-semibold dark:text-white">Circle</span>
       </NavbarBrand>
       <form className="hidden lg:inline">
         <TextInput
@@ -29,23 +28,22 @@ export default function Header() {
           icon={AiOutlineSearch}
         />
       </form>
-      <Button className="w-12 h-10 lg:hidden" color="gray" pill>
+      <Button className="w-12 h-10 lg:hidden " color="gray" pill>
         <AiOutlineSearch />
       </Button>
-      <div className="flex gap-2 md:order-2">
-        <Button className="w-12 h-10 hidden sm:inline" color="gray" pill>
+      <div className="flex justify-center align-middle gap-3 md:order-2 lg:mr-30 ">
+        <Button className="w-12 h-10 hidden sm:inline " color="gray" pill>
           <FaMoon />
         </Button>
         <Link to="/sign-in">
-          <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+          <button className="relative flex items-center justify-center align-middle p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
               <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
                  Sign In
               </span>
           </button> 
         </Link>
-        <NavbarToggle />
+         <NavbarToggle />
       </div>
-
       <NavbarCollapse>
         <NavbarLink as={Link} to="/" active={path==="/"}>
           Home
@@ -58,7 +56,6 @@ export default function Header() {
         </NavbarLink>
       
       </NavbarCollapse>
-       </div>
     </Navbar>
   );
 }
