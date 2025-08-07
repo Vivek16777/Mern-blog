@@ -5,6 +5,7 @@ import userRoutes from "./Routes/user.route.js";
 import authRoutes from "./Routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import errorMiddleware from "./Middleware/errorMiddleware.js";
+import { errorHandler } from "./Utils/error.js";
 dotenv.config(); //read dotenv file and store in process.env
 mongoose
   .connect(process.env.MONGO)
@@ -12,7 +13,7 @@ mongoose
     console.log("mongodb is connected");
   })
   .catch((err) => {
-    console.log(err);
+    return errorHandler(500, "Database connection failed");
   });
 
 const app = express();

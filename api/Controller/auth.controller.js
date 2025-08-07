@@ -23,22 +23,28 @@ export const signup = async (req, res, next) => {
       )
     );
   }
-  const existingUser = await User.findOne({ email });
-  if (existingUser) {
-    return next(errorHandler(409, "user already exists with this email"));
-  }
-  const hashedPassword = bcrypt.hashSync(password, 10);
-
-  const newUser = new User({
-    username,
-    email,
-    password: hashedPassword,
-  });
   try {
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return next(errorHandler(409, "user already exists with this email"));
+    }
+    const existingUsername = await User.findOne({ username });
+    if (existingUsername) {
+      return next(errorHandler(409, "username already exists"));
+    }
+    const hashedPassword = bcrypt.hashSync(password, 10);
+
+    const newUser = new User({
+      username,
+      email,
+      password: hashedPassword,
+    });
+
     await newUser.save();
     res.json({ message: "signup successful" });
   } catch (error) {
-    return next(error);
+    return next(errorHandler(500, "Internal server error"));
   }
 };
 
@@ -65,7 +71,7 @@ export const signin = async (req, res, next) => {
       })
       .json(rest);
   } catch (error) {
-    next(error);
+    next(errorHandler(500, "Internal server error"));
   }
 };
 export const google = async (req, res, next) => {
@@ -88,7 +94,7 @@ export const google = async (req, res, next) => {
       const hashedPassword = bcrypt.hashSync(generatedPassword, 10);
       const newUser = new User({
         username:
-          name.toLowerCase().split(" ") + Math.random().toString(9).slice(-4),
+          name.toLowerCase().split("_") + Math.random().toString(9).slice(-4),
         email,
         password: hashedPassword,
         profilePicture: googlePhotoUrl,
@@ -104,6 +110,6 @@ export const google = async (req, res, next) => {
         .json(rest);
     }
   } catch (error) {
-    next(error);
+    next(setError(500, "Internal server error"));
   }
 };

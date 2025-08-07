@@ -12,11 +12,30 @@ const Signup = () => {
   const handleChange=(e)=>{
     setFormData({...formData, [e.target.id]: e.target.value.trim() });
   };
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const handleSubmit=async(e)=>{
     e.preventDefault();
     if(!formData.username || !formData.email || !formData.password){
       return setErrorMessages("Please fill in all fields");
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(formData.email)){
+      return setErrorMessages("Please enter a valid email address");
+    }
+    if(formData.password.length < 6 || formData.password.length > 1024){
+      return setErrorMessages("Password must be at least 6 characters and at most 1024 characters");
+    } 
+    if(formData.username.length < 3 || formData.username.length > 30){
+      return setErrorMessages("Username must be at least 3 characters and at most 30 characters");
+    }
+    if(!/^[a-zA-Z0-9_]+$/.test(formData.username)){
+      return setErrorMessages("Username can only contain letters, numbers, and underscores");
+    }
+    if(formData.username.includes(" ")){
+      return setErrorMessages("Username cannot contain spaces");
+    }
+    if(formData.email.includes(" ")){
+      return setErrorMessages("Email cannot contain spaces");
     }
     try{
       setLoading(true);
@@ -39,7 +58,7 @@ const Signup = () => {
       }
       setLoading(false);
       if(res.ok){
-        Navigate('/sign-in');
+        navigate('/sign-in');
       }
     } catch(error){
         setErrorMessages(error.message);
@@ -67,7 +86,7 @@ const Signup = () => {
             </div>
             <div>
               <Label>your email</Label>
-              <TextInput type="email" placeholder="name@company.com" id='email' autoComplete="email" onChange={handleChange}/>
+              <TextInput type="text" placeholder="name@company.com" id='email' autoComplete="email" onChange={handleChange}/>
             </div>
             <div>
               <Label>your password</Label>
