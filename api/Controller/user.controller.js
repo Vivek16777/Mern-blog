@@ -80,3 +80,16 @@ export const deleteUser = async (req, res, next) => {
     next(errorHandler(500, "server error"));
   }
 };
+export const signout = (req, res, next) => {
+  try {
+    res
+      .clearCookie("access_token", {
+        httpOnly: true,
+        secure: true,
+      })
+      .status(200)
+      .json("user has been signed out");
+  } catch (error) {
+    next(errorHandler(500, "server error"));
+  }
+};
