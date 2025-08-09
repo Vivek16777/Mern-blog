@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useRef } from "react";
 import { supabase } from "../supabaseClient.js";
 import { Alert } from "flowbite-react";
+import { Link } from "react-router-dom";
 import {
   updateStart,
   updateFailure,
@@ -224,6 +225,11 @@ export default function DashProfile() {
             "Upload"
           )}
         </Button>
+        <Link to={"/createpost"}>
+          <Button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:bg-gradient-to-l focus:ring-purple-200 dark:focus:ring-purple-800 w-full">
+            create a post
+          </Button>
+        </Link>
       </form>
       <div className="text-red-500 flex justify-between mt-5">
         <span onClick={() => setShowModel(true)} className="cursor-pointer">
