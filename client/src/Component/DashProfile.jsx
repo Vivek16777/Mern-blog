@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { TextInput } from "flowbite-react";
+import { ModalHeader, TextInput } from "flowbite-react";
 import { Button } from "flowbite-react";
 import { useState, useEffect } from "react";
 import { useRef } from "react";
@@ -10,17 +10,23 @@ import {
   updateStart,
   updateFailure,
   updateSuccess,
+  deleteUserFailure,
+  deleteUserSuccess,
+  deleteUserStart,
 } from "../Redux/user/userSlice.js";
 import { useDispatch } from "react-redux";
 import { Spinner } from "flowbite-react";
+import { Modal, ModalBody } from "flowbite-react";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 export default function DashProfile() {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, error } = useSelector((state) => state.user);
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
-  const [error, setError] = useState("");
+  const [Usererror, setError] = useState("");
   const { loading, error: errorMessages } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const [showModel, setShowModel] = useState(false);
   const [formData, setFormData] = useState({});
   const filePickerRef = useRef();
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
@@ -108,6 +114,23 @@ export default function DashProfile() {
       setError(error.message);
     }
   };
+  const handleDeleteUser = async () => {
+    setShowModel(false);
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        dispatch(deleteUserFailure(data.message));
+      } else {
+        dispatch(deleteUserSuccess(data));
+      }
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
   return (
     <div className="max-w-lg mx-auto pd-3 w-full">
       <h1 className="my-7 text-center font-semibold text-3xl">Profile</h1>
@@ -139,6 +162,11 @@ export default function DashProfile() {
           ""
         )}
         {error && (
+          <Alert className="flex justify-center" color="failure">
+            {error}
+          </Alert>
+        )}
+        {Usererror && (
           <Alert className="flex justify-center" color="failure">
             {error}
           </Alert>
@@ -184,7 +212,9 @@ export default function DashProfile() {
         </Button>
       </form>
       <div className="text-red-500 flex justify-between mt-5">
-        <span className="cursor-pointer">Delete Account</span>
+        <span onClick={() => setShowModel(true)} className="cursor-pointer">
+          Delete Account
+        </span>
         <span className="cursor-pointer">Sign Out</span>
       </div>
       {updateUserSuccess && (
@@ -192,6 +222,28 @@ export default function DashProfile() {
           {updateUserSuccess}
         </Alert>
       )}
+      <Modal
+        show={showModel}
+        onClose={() => setShowModel(false)}
+        popup
+        size="md"
+      >
+        <ModalHeader />
+        <ModalBody>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
+            <h3 className="mb-4 text-lg text-gray-500 dark:text-gray-400">
+              Are you sure you want to delete your account?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button color="red" onClick={handleDeleteUser}>
+                yes,I'm sure
+              </Button>
+              <Button onClick={() => setShowModel(false)}>No,cancel</Button>
+            </div>
+          </div>
+        </ModalBody>
+      </Modal>
     </div>
   );
 }
